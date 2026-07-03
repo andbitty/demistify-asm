@@ -51,3 +51,5 @@ named storage, nothing stops you reusing one.
 
 That's the whole game at the bottom: tiny, explicit steps moving numbers between
 named slots. Everything else — loops, functions, memory — is built from this.
+
+{% include try-it.html %}

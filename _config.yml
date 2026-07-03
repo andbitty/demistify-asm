@@ -15,6 +15,12 @@ baseurl: ""
 # Leave blank to disable. Only loads in production builds.
 google_analytics: "G-Z15GW8CSDX"
 
+# Browser-based RISC-V simulator we point readers at to run code themselves.
+# Single source of truth: the per-lesson "Try it yourself" include and the
+# /run/ guide page both read these. Switch tools by editing here only.
+sim_name: "Venus"
+sim_url: "https://venus.cs61c.org/"
+
 # --- Collections: each learning track is a collection ---
 collections:
   history:

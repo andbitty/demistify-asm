@@ -110,3 +110,5 @@ With `jal`/`ret` for control and `a0`–`a7` for data, functions stop being magi
 they're a jump that remembers, plus a handshake about registers. Every library you
 call rides on this same convention — and so does asking the *operating system* for
 help, which is the same handshake aimed one level lower still.
+
+{% include try-it.html %}

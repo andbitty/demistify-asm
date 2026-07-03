@@ -65,3 +65,5 @@ frame is the contract.
   every call drifts `sp` further down.)
 - Why save `ra` at all? (A nested call would overwrite it, and you'd lose your
   way home.)
+
+{% include try-it.html %}

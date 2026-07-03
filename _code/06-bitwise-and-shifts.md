@@ -101,3 +101,5 @@ slide the whole pattern down (÷16) and up (×2). Same input, six windows onto i
 Bits are the bedrock everything else is built on. Once you can mask, set, flip, and
 slide them, you can decode any packed format the hardware hands you — and you've
 seen why compilers love turning `x * 8` into a single shift.
+
+{% include try-it.html %}

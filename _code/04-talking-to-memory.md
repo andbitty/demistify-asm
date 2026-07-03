@@ -119,3 +119,5 @@ Memory is where programs keep everything bigger than a handful of registers. Wit
 loads, stores, and a marching pointer, you can now touch all of it — and that's
 the foundation the [stack]({{ '/code/02-the-stack/' | relative_url }}) was quietly
 standing on the whole time.
+
+{% include try-it.html %}

@@ -88,3 +88,5 @@ the same three instructions run three times, summing 3 + 2 + 1 = 6 in `t1`.
 
 Branches are the last primitive you need. Straight-line code, a way to repeat,
 and a way to choose — every program you'll ever write is built from just these.
+
+{% include try-it.html %}
