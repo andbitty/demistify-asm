@@ -45,6 +45,10 @@ kramdown:
 
 # --- Privacy: keep internal docs out of the build ---
 # (the leading underscore on _internal/ already makes Jekyll skip it; this is belt + suspenders)
+# Jekyll skips dot-directories, so .well-known/ needs an explicit opt-in.
+include:
+  - .well-known
+
 exclude:
   - _internal/
   - Gemfile
