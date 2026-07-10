@@ -37,6 +37,9 @@ jobs:
       - uses: actions/upload-pages-artifact@v5
         with:
           path: ./_site
+          # Without this the action tars _site with --exclude=.[^/]*, which
+          # silently drops .well-known/ (security.txt) from the deploy.
+          include-hidden-files: true
 
   deploy:
     needs: build
