@@ -86,3 +86,7 @@ means learning the ideas in their most legible, least encumbered form.
 - This is the hinge where the history track hands off to the hands-on track:
   every lesson in the code track from here on is written directly against
   RISC-V's base integer instructions.
+
+Ready to write some? Start the code track at
+[Your First Instructions]({{ '/code/01-your-first-instructions/' | relative_url }}) —
+`RV32I`, the base set described above, in your own hands.

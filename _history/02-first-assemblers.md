@@ -64,3 +64,9 @@ exactly the bookkeeping a human used to do by eye, now done perfectly every time
   programs could finally grow past a few dozen lines.
 - The leap from here is letting one written line stand for *many* instructions —
   macros, and eventually higher-level languages. That's the next thread to pull.
+
+Want mnemonics and labels in your own hands instead of on the page? The code
+track starts at
+[Your First Instructions]({{ '/code/01-your-first-instructions/' | relative_url }}),
+and its label mechanics get the full treatment in
+[Sections, Directives, and Labels]({{ '/code/08-sections-directives-and-labels/' | relative_url }}).

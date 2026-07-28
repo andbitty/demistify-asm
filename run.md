@@ -55,9 +55,10 @@ each move against the lesson's trace.
 
 - **Some lesson snippets are fragments.** Our traces sometimes show just the few
   instructions that make a point, without a way to stop. If the simulator complains
-  that it "ran off the end," add a terminating environment call — the simulator's
-  help lists the exact `ecall` code it expects for *exit*. (We cover `ecall`
-  properly in a later lesson.)
+  that it "ran off the end," add a terminating environment call: `addi a0, zero,
+  10` followed by `ecall`. See
+  [system calls]({{ '/code/09-system-calls/' | relative_url }}) for the full story
+  on `ecall` and why `a0` picks the service.
 - **Labels need the whole loop.** If a snippet branches to a label like `loop:`,
   paste the entire loop, not just the body, so the label is defined.
 - **It's a learning tool, not silicon.** A simulator is an idealized model. It's

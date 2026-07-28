@@ -58,6 +58,18 @@
   let i = 0;
   let timer = null;
 
+  // Fire once per page view, on the first real interaction — tells us
+  // whether the "interactive" tag on a lesson card actually gets used.
+  let engaged = false;
+  function markEngaged() {
+    if (engaged) return;
+    engaged = true;
+    if (typeof window.dasmTrack === "function") {
+      const grid = document.querySelector("[data-lesson-id]");
+      window.dasmTrack("trace_engaged", { lesson: grid ? grid.dataset.lessonId : null, steps: frames.length });
+    }
+  }
+
   // Trace values are author-controlled, but escape anyway so a stray < or &
   // can never break markup (or inject anything if a trace is ever sourced externally).
   function esc(s) {
@@ -101,19 +113,19 @@
   }
 
   scrub.max = String(frames.length - 1);
-  btn("first").addEventListener("click", () => { stop(); go(0); });
-  btn("prev").addEventListener("click", () => { stop(); go(i - 1); });
-  btn("next").addEventListener("click", () => { stop(); go(i + 1); });
-  btn("play").addEventListener("click", play);
-  scrub.addEventListener("input", () => { stop(); go(Number(scrub.value)); });
+  btn("first").addEventListener("click", () => { markEngaged(); stop(); go(0); });
+  btn("prev").addEventListener("click", () => { markEngaged(); stop(); go(i - 1); });
+  btn("next").addEventListener("click", () => { markEngaged(); stop(); go(i + 1); });
+  btn("play").addEventListener("click", () => { markEngaged(); play(); });
+  scrub.addEventListener("input", () => { markEngaged(); stop(); go(Number(scrub.value)); });
 
   // Keyboard: arrows step, space plays — only when the visualizer is in view/focus.
   root.setAttribute("tabindex", "0");
   root.addEventListener("keydown", (e) => {
-    if (e.key === "ArrowRight") { e.preventDefault(); stop(); go(i + 1); }
-    else if (e.key === "ArrowLeft") { e.preventDefault(); stop(); go(i - 1); }
-    else if (e.key === "Home") { e.preventDefault(); stop(); go(0); }
-    else if (e.key === " ") { e.preventDefault(); play(); }
+    if (e.key === "ArrowRight") { markEngaged(); e.preventDefault(); stop(); go(i + 1); }
+    else if (e.key === "ArrowLeft") { markEngaged(); e.preventDefault(); stop(); go(i - 1); }
+    else if (e.key === "Home") { markEngaged(); e.preventDefault(); stop(); go(0); }
+    else if (e.key === " ") { markEngaged(); e.preventDefault(); play(); }
   });
 
   render();

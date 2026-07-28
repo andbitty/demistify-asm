@@ -80,3 +80,11 @@ arrived at higher-level languages.
   As the software stack climbed, the hardware contract underneath it had to become
   a deliberate, documented thing — a designed **instruction set**. That's the next
   thread to pull.
+
+This one-line-for-many trick didn't stay in the past — a modern assembler still
+does it, quietly, every time you write `mv` or `ret`. See it happen for real in
+the code track's
+[Pseudo-Instructions]({{ '/code/07-pseudo-instructions/' | relative_url }})
+lesson (start from
+[Your First Instructions]({{ '/code/01-your-first-instructions/' | relative_url }})
+if you're new to the track).
