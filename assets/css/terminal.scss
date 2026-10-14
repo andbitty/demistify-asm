@@ -90,9 +90,18 @@ code, pre, .mono { font-family: var(--mono); }
 
 /* ---------- hero ---------- */
 .hero { padding: clamp(2rem, 6vw, 4.5rem) 0 1.5rem; }
-.hero-title { font-family: var(--mono); font-size: clamp(2rem, 4vw + 1rem, 3.4rem); margin: 0 0 .4rem; letter-spacing: -.02em; }
-.hero-tagline { font-size: clamp(1.1rem, 2vw, 1.4rem); font-style: italic; color: var(--fg-dim); margin: 0 0 1.2rem; }
+.hero-title { font-family: var(--mono); font-size: clamp(1.7rem, 3vw + 1rem, 2.8rem); margin: 0 0 .8rem; letter-spacing: -.02em;
+  line-height: 1.2; text-wrap: balance; }
 .hero-lede { max-width: 46rem; }
+/* The two "start here" links: one for each track, side by side on wide screens. */
+.hero-starts { display: grid; gap: .8rem; margin-top: 1.2rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); }
+.start { display: flex; flex-direction: column; align-items: flex-start; gap: .3rem; padding: 1rem 1.1rem;
+  background: var(--bg-panel); border: 1px solid var(--accent); border-radius: var(--radius); color: var(--fg); }
+.start:hover { text-decoration: none; box-shadow: var(--glow); transform: translateY(-1px); }
+.start-track { font-family: var(--mono); font-size: .8rem; color: var(--fg-dim); }
+.start-track .ico { color: var(--accent); }
+.start-title { font-family: var(--mono); font-weight: 700; color: var(--accent); }
 
 /* ---------- track + cards ---------- */
 .track { padding: 2rem 0; border-top: 1px solid var(--line); }

@@ -10,7 +10,7 @@ trace:
     - "add  t2, t0, t1       # t2 = t0 + t1"
     - "addi t2, t2, 10       # t2 = t2 + 10"
   steps:
-    - { line: 0, pc: "0x00", regs: { t0: 5 }, note: "addi loads an immediate. zero is always 0, so t0 = 5." }
+    - { line: 0, pc: "0x00", regs: { t0: 5 }, note: "addi adds a fixed number to a register. zero is always 0, so t0 = 0 + 5 = 5." }
     - { line: 1, pc: "0x04", regs: { t1: 3 }, note: "Same trick: t1 = 0 + 3 = 3." }
     - { line: 2, pc: "0x08", regs: { t2: 8 }, note: "add sums two registers: t2 = t0 + t1 = 8." }
     - { line: 3, pc: "0x0c", regs: { t2: 18 }, note: "Reusing t2 as both source and destination: t2 = 8 + 10 = 18." }

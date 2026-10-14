@@ -2,12 +2,28 @@
 layout: default
 ---
 <section class="hero">
-  <h1 class="hero-title">Demystifying Assembly</h1>
-  <p class="hero-tagline">Mind the <span class="asm">ch·asm</span> between you and the machine.</p>
+  {%- comment -%}
+    The header already shows the site name and tagline, so the hero does not
+    repeat them. It gives one clear first step for each track instead.
+  {%- endcomment -%}
+  <h1 class="hero-title">Learn assembly, one instruction at a time.</h1>
   <p class="hero-lede">
     Assembly isn't magic — it's the thin, honest layer between your ideas and the
-    silicon. Pick a track and go from first principles to fluency.
+    silicon. Pick where to start:
   </p>
+  <div class="hero-starts">
+    {%- for t in site.data.tracks.list -%}
+      {%- assign items = site[t.id] | sort: "order" -%}
+      {%- assign first = items | first -%}
+      {%- if first -%}
+      <a class="start" href="{{ first.url | relative_url }}" data-track="home_start_{{ t.id }}">
+        <span class="start-track"><span class="ico" aria-hidden="true">{{ t.icon }}</span> {{ t.title }} · {{ items.size }} lessons</span>
+        <span class="start-title">{{ first.title }} ❯</span>
+        {%- if first.trace %}<span class="card-tag">interactive</span>{%- endif -%}
+      </a>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
 </section>
 
 {%- for t in site.data.tracks.list -%}
@@ -42,3 +58,5 @@ layout: default
     {%- endif -%}
   </section>
 {%- endfor -%}
+
+<script src="{{ '/assets/js/progress.js' | relative_url }}" defer></script>

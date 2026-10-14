@@ -38,6 +38,8 @@ arch: riscv
 trace:                   # optional — include only for interactive lessons
   code:
     - "addi t0, zero, 5"
+  start:                 # optional — values that exist before line 0 runs
+    regs: { sp: "0x7fc0" }
   steps:
     - { line: 0, regs: { t0: 5 }, note: "..." }
 ---
@@ -45,7 +47,8 @@ trace:                   # optional — include only for interactive lessons
 
 Navigation, prev/next, the "N of M" counter, and the progress bar are all
 derived from `order` — no template edits needed. Omitted state in a step
-carries forward from the previous step.
+carries forward from the previous step. The visualizer opens on a "start" frame before
+line 0: empty, or the `start` values if you give them.
 
 Add a whole new track by appending an entry to `_data/tracks.yml` and creating
 a matching `_<id>/` collection in `_config.yml`.

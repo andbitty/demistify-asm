@@ -11,8 +11,9 @@ trace:
     - "addi a0, a0, 4       # advance the pointer one word (4 bytes)"
     - "addi t2, t2, -1      # one fewer element to go"
     - "bne  t2, zero, loop  # repeat until the count reaches 0"
+  start: { regs: { a0: "0x2000", t2: 2 }, mem: { "0x2000": "10", "0x2004": "32" }, note: "Before the first instruction: the array [10, 32] is in memory at 0x2000, a0 points at its first element, and t2 counts its 2 elements. Press step ▶ to run the first instruction." }
   steps:
-    - { line: 0, pc: "0x00", regs: { a0: "0x2000", t2: 2, t0: 0 }, mem: { "0x2000": "10", "0x2004": "32" }, note: "Setup: a0 points at the first element, t2 counts the 2 elements, sum t0 = 0. The memory panel shows the array sitting at 0x2000." }
+    - { line: 0, pc: "0x00", regs: { t0: 0 }, note: "Set the sum to 0: t0 = 0. a0 and t2 were set before this code, so the loop can start." }
     - { line: 1, pc: "0x04", regs: { t1: 10 }, note: "lw reads the word a0 points at (offset 0): t1 = mem[0x2000] = 10." }
     - { line: 2, pc: "0x08", regs: { t0: 10 }, note: "Accumulate into the running sum: t0 = 0 + 10." }
     - { line: 3, pc: "0x0c", regs: { a0: "0x2004" }, note: "March the pointer: add 4 bytes so a0 now points at the next word." }

@@ -12,6 +12,7 @@ trace:
     - "lw   s0, 8(sp)       # restore s0"
     - "lw   ra, 12(sp)      # restore return address"
     - "addi sp, sp, 16      # release the frame"
+  start: { regs: { sp: "0x7fc0", ra: "0x104", s0: "old s0" }, note: "Before the first instruction: sp points at the top of the stack, ra holds the return address, and s0 holds a value that belongs to the caller. Press step ▶ to run the first instruction." }
   steps:
     - { line: 0, regs: { sp: "0x7fb0" }, note: "The stack grows downward. Subtracting 16 reserves a 16-byte frame." }
     - { line: 1, regs: { sp: "0x7fb0", ra: "0x104" }, mem: { "0x7fbc": "0x104 (ra)" }, note: "sw stores a word to memory: ra is saved at sp+12." }

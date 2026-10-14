@@ -5,8 +5,11 @@
 
    Trace shape:
      { code: ["...", ...],
+       start: { regs:{}, mem:{}, flags:{}, note },     (optional)
        steps: [ { line, regs:{}, mem:{}, flags:{}, note }, ... ] }
-   Any state key omitted on a step is carried forward from the previous step. */
+   Any state key omitted on a step is carried forward from the previous step.
+   Frame 0 is the state before the first instruction runs: empty, or the
+   values in `start` (for example a stack pointer or an array that already exist). */
 
 (function () {
   const dataEl = document.getElementById("trace-data");
@@ -31,8 +34,14 @@
 
   // Pre-compute the *cumulative* state at each step (carry-forward) plus the
   // set of keys that changed at that step (for diff highlighting).
-  const frames = [];
-  let acc = { regs: {}, mem: {}, flags: {} };
+  const start = trace.start || {};
+  let acc = { regs: { ...start.regs }, mem: { ...start.mem }, flags: { ...start.flags } };
+  const frames = [{
+    line: -1,
+    note: start.note || "Press step ▶ to run the first instruction.",
+    state: { regs: { ...acc.regs }, mem: { ...acc.mem }, flags: { ...acc.flags } },
+    changed: { regs: new Set(), mem: new Set(), flags: new Set() },
+  }];
   for (const step of steps) {
     const changed = { regs: new Set(), mem: new Set(), flags: new Set() };
     for (const panel of ["regs", "mem", "flags"]) {
@@ -66,7 +75,7 @@
     engaged = true;
     if (typeof window.dasmTrack === "function") {
       const grid = document.querySelector("[data-lesson-id]");
-      window.dasmTrack("trace_engaged", { lesson: grid ? grid.dataset.lessonId : null, steps: frames.length });
+      window.dasmTrack("trace_engaged", { lesson: grid ? grid.dataset.lessonId : null, steps: steps.length });
     }
   }
 
@@ -95,7 +104,7 @@
     renderPanel("mem", f.state.mem, f.changed.mem);
     renderPanel("flags", f.state.flags, f.changed.flags);
     noteEl.textContent = f.note;
-    counterEl.textContent = `${i + 1} / ${frames.length}`;
+    counterEl.textContent = i === 0 ? `start / ${frames.length - 1}` : `${i} / ${frames.length - 1}`;
     scrub.value = String(i);
     btn("first").disabled = i === 0;
     btn("prev").disabled = i === 0;
